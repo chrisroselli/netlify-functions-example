@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Netlify Functions Examples</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500|Roboto+Mono" rel="stylesheet">
+    <link href="/normalize.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Netlify Functions Examples</h1>
+    <p>
+      Hi there! This is a playground to test out
+      <a href="https://www.netlify.com/docs/functions">Netlify’s Lambda Functions</a>.
+    </p>
+    <p>
+      You can browse the code for this site on
+      <a href="https://github.com/imorente/netlify-functions-example">GitHub</a>,
+      or play around with the code yourself
+      <a href="https://app.netlify.com/start/deploy?repository=https://github.com/imorente/netlify-functions-example">
+      deploying a copy to Netlify</a>.
+    </p>
+    <article>
+      <h2>Purge CSS</h2>
+      <p>The PurgeCSS example.</p>
+      <pre class="language-js"><code>import Purgecss from 'purgecss'
+import purgeHtml from 'purge-from-html'
+
+exports.handler = async function(event) {
+  const purgeCss = new Purgecss({
+    content: ['test.html'],
+    css: ['test.css'],
+    extractors: [
+      {
+        extractor: purgeHtml,
+        extensions: ['html']
+      }
+    ]
+  })
+  const purgecssResult = JSON.stringify(purgeCss.purge());
+  let cleanString = purgecssResult.substring(1,purgecssResult.length-1).replace(/[\\]/g, "");
+  return {
+    statusCode: 200,
+    body: cleanString
+  };
+};</code></pre>
+      <h3>Try it out</h3>
+      <p><a href="/.netlify/functions/purgecss">Purge!</a></p>
+    </article>
+    <article>
+      <h2>Clean CSS</h2>
+      <p>The CleanCSS example.</p>
+      <pre class="language-js"><code>const CleanCSS = require('clean-css');
+
+exports.handler = function(event, context, callback) {
+     var source = `
+@import url(https://a80427d48f9b9f165d8d-c913073b3759fb31d6b728a919676eab.ssl.cf1.rackcdn.com/v3/colorbox/colorbox.css);
+@import url(https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css);`;
+
+     
+new CleanCSS({ inline: ['remote'] }).minify(source, function (error, output) {
+         
+      // output.styles
+     callback(null, {
+                statusCode: 200,
+                body: JSON.stringify(output)
+                });
+     
+     });
+ 
+              
+}</code></pre>
+      <h3>Try it out</h3>
+      <p><a href="/.netlify/functions/cleancss">Clean!</a></p>
+    </article>
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.14.0/prism.min.js"></script>
+    <script src="main.js"></script>
+  <script type="text/javascript" src="main.js"></script></body>
+</html>

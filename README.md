@@ -1,5 +1,7 @@
 # Netlify Functions examples
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8138e72a-0cb2-40ad-8339-a80c5ae81312/deploy-status)](https://app.netlify.com/sites/eloquent-payne-47a444/deploys)
+
 Hi there! This is a playground repo to test out [Netlify’s Lambda Functions](https://www.netlify.com/docs/functions). You can see a live
 demo of the examples at https://functions-playground.netlify.com.
 
