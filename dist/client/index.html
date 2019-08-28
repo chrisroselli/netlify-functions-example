@@ -23,18 +23,11 @@
       <h2>Purge CSS</h2>
       <p>The PurgeCSS example.</p>
       <pre class="language-js"><code>import Purgecss from 'purgecss'
-import purgeHtml from 'purge-from-html'
 
 exports.handler = async function(event) {
   const purgeCss = new Purgecss({
-    content: ['test.html'],
-    css: ['test.css'],
-    extractors: [
-      {
-        extractor: purgeHtml,
-        extensions: ['html']
-      }
-    ]
+    content: ['src/test.html'],
+    css: ['src/test.css']
   })
   const purgecssResult = JSON.stringify(purgeCss.purge());
   let cleanString = purgecssResult.substring(1,purgecssResult.length-1).replace(/[\\]/g, "");
