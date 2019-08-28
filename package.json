@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "clean-css": "^4.2.1",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.0",
+    "purge-from-html": "^1.0.3"
   }
 }
